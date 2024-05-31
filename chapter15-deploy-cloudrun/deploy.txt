@@ -1,0 +1,13 @@
+docker build -t gcr.io/hypnovcom-gcloud/gin-app .
+
+docker push gcr.io/hypnovcom-gcloud/gin-app
+
+gcloud run deploy gin-app \
+  --image gcr.io/hypnovcom-gcloud/gin-app \
+  --port 8080 \
+  --region us-central1
+
+
+debug
+
+docker run -it --entrypoint /bin/sh gcr.io/hypnovcom-gcloud/gin-app 

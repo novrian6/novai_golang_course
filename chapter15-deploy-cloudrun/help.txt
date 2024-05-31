@@ -1,0 +1,78 @@
+Saya menemukan contoh aplikasi web yang aman menggunakan OAuth dengan Auth0 dalam sumber daya yang Anda sediakan. Aplikasi ini menggunakan server Go dengan middleware untuk autentikasi dan manajemen sesi. Berikut adalah langkah-langkah dasar untuk membuat dan menjalankan aplikasi ini, serta mengunggahnya ke Google Cloud Run:
+
+Langkah 1: Membuat Aplikasi Web dengan Gin
+Pertama, Anda perlu membuat aplikasi web menggunakan Gin. Berikut adalah contoh dasar struktur aplikasi:
+
+go
+Copy code
+package main
+
+import (
+    "net/http"
+    "github.com/gin-gonic/gin"
+)
+
+func main() {
+    router := gin.Default()
+
+    router.GET("/", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{"message": "Hello World"})
+    })
+
+    router.Run(":8080")
+}
+Langkah 2: Menambahkan Autentikasi OAuth dengan Auth0
+Tambahkan middleware untuk mengelola autentikasi dengan Auth0. Anda harus mendaftar di Auth0, membuat aplikasi, dan mendapatkan ClientID, ClientSecret, Domain, dan CallbackURL. Tambahkan konfigurasi ini ke aplikasi Anda.
+
+Langkah 3: Membuat Dockerfile
+Buat Dockerfile untuk aplikasi Anda agar dapat dijalankan dalam kontainer Docker:
+
+dockerfile
+Copy code
+# Start from a Debian-based image with Go installed
+FROM golang:1.17 as builder
+
+# Set the Current Working Directory inside the container
+WORKDIR /app
+
+# Copy everything from the current directory to the Working Directory inside the container
+COPY . .
+
+# Build the Go app
+RUN go build -o main .
+
+# Start a new stage from scratch
+FROM alpine:latest  
+
+WORKDIR /root/
+
+# Copy the Pre-built binary file from the previous stage
+COPY --from=builder /app/main .
+
+# Expose port 8080 to the outside world
+EXPOSE 8080
+
+# Command to run the executable
+CMD ["./main"]
+Langkah 4: Membangun dan Menjalankan Docker Container
+Gunakan perintah berikut untuk membangun dan menjalankan container Docker:
+
+bash
+Copy code
+docker build -t gin-app .
+docker run -d -p 8080:8080 gin-app
+Langkah 5: Mendaftarkan Aplikasi di Google Cloud Run
+Pastikan Anda memiliki gcloud CLI terinstal dan dikonfigurasi untuk proyek Google Cloud Anda.
+Unggah image Docker ke Container Registry:
+bash
+Copy code
+gcloud auth configure-docker
+docker tag gin-app gcr.io/[PROJECT-ID]/gin-app
+docker push gcr.io/[PROJECT-ID]/gin-app
+Gunakan gcloud CLI untuk menerapkan aplikasi ke Cloud Run:
+bash
+Copy code
+gcloud run deploy --image gcr.io/[PROJECT-ID]/gin-app --platform managed
+Ikuti petunjuk di CLI untuk menentukan pengaturan seperti nama layanan, wilayah, dan autentikasi. Setelah selesai, Cloud Run akan memberikan URL yang dapat Anda gunakan untuk mengakses aplikasi Anda​​.
+
+Jika Anda membutuhkan langkah-langkah lebih detail atau mengalami masalah, dokumentasi Google Cloud Run menyediakan panduan dan solusi masalah yang komprehensif.

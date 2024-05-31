@@ -1,0 +1,44 @@
+install delve
+
+
+
+go get -u github.com/go-delve/delve/cmd/dlv
+
+
+
+
+Selanjutnya, kompilasi program dengan flag -gcflags="all=-N -l" untuk menonaktifkan inline optimization dan membuat kode lebih mudah untuk debug:
+
+
+go build -gcflags="all=-N -l" -o main .
+
+
+
+ekarang, jalankan program dengan debugger:
+
+
+
+dlv exec ./main
+
+
+Anda akan masuk ke prompt debugger.
+
+Jalankan program:
+
+
+
+(dlv) run
+
+
+
+Debugger akan berhenti di titik awal program.
+
+Set breakpoint di dalam fungsi Add:
+bash
+Copy code
+(dlv) break main.Add
+Lanjutkan eksekusi:
+bash
+Copy code
+(dlv) continue
+

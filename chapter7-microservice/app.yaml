@@ -1,0 +1,14 @@
+runtime: go113
+env: flex
+
+handlers:
+- url: /count-characters
+  script: auto
+
+# Menambahkan ini jika Anda menggunakan Go module
+# Dan file go.mod dan go.sum ada di root proyek Anda
+env_variables:
+  GO111MODULE: on
+
+# Opsional: atur versi App Engine yang digunakan
+# dan konfigurasi lainnya sesuai kebutuhan Anda
