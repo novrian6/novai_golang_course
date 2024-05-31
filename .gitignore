@@ -4,3 +4,4 @@ github.com/gin-gonic/gin/
 github.com/go-playground/locales/
 github.com/go-playground/universal-translator/
 github.com/go-playground/validator/
+github.com/golang/protobuf/
