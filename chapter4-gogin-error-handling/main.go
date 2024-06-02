@@ -37,7 +37,7 @@ func ErrorHandler() gin.HandlerFunc {
 
 				// Return an error response to the client
 				c.JSON(http.StatusInternalServerError, gin.H{
-					"error": "Internal Server Error",
+					"error": "Recovered Internal Server Error",
 				})
 			}
 		}()

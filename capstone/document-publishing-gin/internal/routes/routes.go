@@ -28,6 +28,7 @@ func SetupRoutes(router *gin.Engine, db *gorm.DB) {
 	router.POST("/register", registerController.Register)
 
 	// API routes
+	//test using req bin to  http://localhost:8080/api/users http get, pass the token by custom
 	api := router.Group("/api")
 	api.Use(middleware.AuthMiddleware()) // Apply JWT authentication middleware
 	{

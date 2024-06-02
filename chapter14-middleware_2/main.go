@@ -41,6 +41,6 @@ func main() {
 	r.HandleFunc("/about", AboutHandler).Methods("GET")
 
 	// Start the server
-	fmt.Println("Server is running on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	fmt.Println("Server is running on http://localhost:8081")
+	log.Fatal(http.ListenAndServe(":8081", r))
 }

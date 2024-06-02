@@ -1,3 +1,5 @@
+//test with reqbin with custom header
+
 package main
 
 import (
@@ -19,7 +21,7 @@ func main() {
 		c.JSON(200, gin.H{"user_id": id})
 	})
 
-	r.Run(":8080")
+	r.Run(":8082")
 }
 
 // LoggerMiddleware adalah contoh middleware untuk logging
@@ -32,7 +34,7 @@ func LoggerMiddleware(c *gin.Context) {
 	// Logging setelah handler selesai dieksekusi
 	end := time.Now()
 	latency := end.Sub(start)
-	fmt.Printf("%s - %s - %v\n", c.Request.Method, c.Request.URL.Path, latency)
+	fmt.Printf("Logger:%s - %s - %v\n", c.Request.Method, c.Request.URL.Path, latency)
 }
 
 // AuthMiddleware adalah contoh middleware untuk autentikasi
@@ -48,4 +50,3 @@ func AuthMiddleware(c *gin.Context) {
 	// Lanjut ke handler berikutnya jika autentikasi berhasil
 	c.Next()
 }
-

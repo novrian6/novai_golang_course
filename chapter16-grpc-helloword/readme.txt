@@ -10,10 +10,8 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
 3.Generate Code: Navigate to the directory where your hello.proto file is located, then run the following command to generate the Go code for gRPC:
 
-protoc --go_out=. --go-grpc_out=. hello.proto
-org
-protoc --go_out=hello --go_opt=paths=source_relative --go-grpc_out=hello --go-grpc_opt=paths=s
-
+ 
+protoc --go_out=hello --go_opt=paths=source_relative --go-grpc_out=hello --go-grpc_opt=paths=source_relative hello.proto
 Note :
 - the project path under src is /chapter16-grpc-helloword
 - go mod init is chapter16-grpc-helloword
