@@ -1,0 +1,36 @@
+1
+Setup dan Permission untuk docker push gcr.io/hypnovcom-gcloud/gin-app di Google Cloud Console
+ Langkah-langkah Setup:
+
+Buka Google Cloud Console: <URL yang tidak valid dihapus>
+Pilih project: Klik menu dropdown di pojok kanan atas dan pilih project hypnovcom-gcloud.
+Aktifkan Cloud Build API:
+Di sidebar kiri, pilih APIs & Services.
+Klik Library.
+Cari Cloud Build API dan klik Enable.
+Aktifkan Container Registry API:
+Di sidebar kiri, pilih APIs & Services.
+Klik Library.
+Cari Container Registry API dan klik Enable.
+ Langkah-langkah Permission:
+
+Buat IAM Role:
+Di sidebar kiri, pilih IAM & Admin.
+Klik Roles.
+Klik + Create Role.
+Masukkan nama role, contoh: MyDockerPusher.
+Pilih tab Permissions.
+Cari Storage Object Admin dan pilih Select.
+Klik Create.
+Tambahkan Member ke IAM Role:
+Di sidebar kiri, pilih IAM & Admin.
+Klik IAM.
+Klik + Add.
+Pilih New Principals.
+Masukkan serviceAccount:default@cloudbuild.gserviceaccount.com.
+Pilih role MyDockerPusher yang dibuat sebelumnya.
+Klik Save.
+ Verifikasi:
+
+Coba push image Docker: Buka terminal dan jalankan:
+ docker push gcr.io/hypnovcom-gcloud/gin-app

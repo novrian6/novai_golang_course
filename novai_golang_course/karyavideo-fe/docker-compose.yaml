@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db:
+    container_name: karyavideodb
+    image: mysql
+    hostname: db
+    environment:
+      MYSQL_ROOT_PASSWORD: password123
+      MYSQL_USER: nova
+      MYSQL_PASSWORD: nova123
+    ports:
+    - 3306:3306
+    expose:
+      - 3306
+    networks:
+      - karyanet
+    volumes:
+      - dbdata:/var/lib/mysql
+  karyaapp:
+    container_name: karyaapp
+    image: gcr.io/coral-burner-309611/karyaapp:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      GET_HOSTS_FROM: dns
+    networks:
+      - karyanet
+    #volumes:
+    #- .:/go/src/karyavideo
+    ports:
+    - 8080:8083
+    depends_on:
+      - db
+    labels:
+      kompose.service.type: LoadBalancer
+
+
+volumes:
+  dbdata:
+
+networks:
+  karyanet:
+      driver: bridge

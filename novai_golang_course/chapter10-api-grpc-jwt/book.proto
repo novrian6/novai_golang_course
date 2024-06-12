@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package book;
+
+option go_package = ".";
+
+
+message Book {
+    int32 id = 1;
+    string title = 2;
+    string author = 3;
+    int32 year = 4;
+    string isbn = 5;
+}
+
+service BookService {
+    rpc GetBooks(GetBooksRequest) returns (GetBooksResponse) {}
+    rpc UpdateBook(UpdateBookRequest) returns (UpdateBookResponse) {}
+}
+
+message GetBooksRequest {
+    // Any request-specific fields can be defined here
+}
+
+message GetBooksResponse {
+    repeated Book books = 1;
+}
+
+message UpdateBookRequest {
+    Book book = 1;
+}
+
+message UpdateBookResponse {
+    // Any response-specific fields can be defined here
+}

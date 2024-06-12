@@ -1,0 +1,4 @@
+{"animal":"walrus","level":"info","msg":"A group of walrus emerges from the ocean","size":10,"time":"2024-06-11T06:25:12+07:00"}
+{"level":"error","msg":"It's too cold","temperature":-4,"time":"2024-06-11T06:25:12+07:00"}
+{"age":30,"level":"warning","msg":"User is getting old","time":"2024-06-11T06:25:12+07:00","user":"john"}
+{"level":"info","msg":"Logging complete","time":"2024-06-11T06:25:12+07:00"}

@@ -1,0 +1,10 @@
+" ============================================================================
+" Netrw Directory Listing                                        (netrw v173)
+"   /Users/novanovriansyah/code/go/src/novai_golang_course/chapter5-goroutine
+"   Sorted by      name
+"   Sort sequence: [\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$
+"   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:special
+" ==============================================================================
+../
+./
+main.go
