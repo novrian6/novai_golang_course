@@ -53,7 +53,7 @@ func register(c *gin.Context) {
 		return
 	}
 
-	resp, err := http.Post("http://localhost:8080/register", "application/json", bytes.NewBuffer(jsonData))
+	resp, err := http.Post("http://localhost:8080/api/register", "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to register"})
 		return

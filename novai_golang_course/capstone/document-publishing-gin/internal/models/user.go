@@ -36,3 +36,15 @@ func (u *User) ChangePassword(db *gorm.DB, newPassword string) error {
 
 	return nil
 }
+
+// GetRoleLabel returns "ADM" if the user's role is "admin", otherwise "USER"
+func (user *User) GetRoleMapToLabel(db *gorm.DB) (string, error) {
+	var result User
+	if err := db.First(&result, user.ID).Error; err != nil {
+		return "", err
+	}
+	if result.Role == "admin" {
+		return "ADM", nil
+	}
+	return "USER", nil
+}

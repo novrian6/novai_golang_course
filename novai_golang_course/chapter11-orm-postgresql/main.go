@@ -23,7 +23,7 @@ func main() {
 	defer db.Close()
 
 	// Migrasi model ke database (membuat tabel jika belum ada)
-	db.AutoMigrate(&User{})
+	//db.AutoMigrate(&User{})
 
 	// Contoh operasi CRUD
 	// Insert data
@@ -33,11 +33,11 @@ func main() {
 	// Query data
 	var users []User
 	db.Find(&users)
-	fmt.Println("Users:", users)
+	fmt.Println("Get Users:", users)
 
 	// Update data
 	db.Model(&user).Update("Name", "Jane Doe")
-
+	fmt.Println("User is Updated:", users)
 	// Delete data
 	db.Delete(&user)
 

@@ -16,6 +16,6 @@ func Sum(nums ...int) int {
 
 func main() {
 
-	total := Sum(1, 2, 3, 3, 4, 4, 2, 4)
+	total := Sum(1, 2, 3, 3, 4, 4, 2, 4, 1, 100)
 	fmt.Println("total:" + fmt.Sprintf("%d", total))
 }
