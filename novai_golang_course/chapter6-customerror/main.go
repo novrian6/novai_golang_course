@@ -4,33 +4,27 @@ import (
 	"fmt"
 )
 
-// CustomError is a custom error type that implements the error interface.
-type CustomError struct {
-	Code    int
-	Message string
+// Define the custom error type
+type MyError struct {
+	Msg string
 }
 
-// Error returns the error message of CustomError.
-func (e *CustomError) Error() string {
-	return fmt.Sprintf("Custom Error %d: %s", e.Code, e.Message)
+// Implement the error interface
+func (e *MyError) Error() string {
+	return e.Msg
 }
 
-// FunctionThatMightFail is a function that returns a custom error.
-func FunctionThatMightFail(input int) error {
-	if input < 0 {
-		return &CustomError{Code: 400, Message: "Input cannot be negative"}
-	}
-	return nil
+// A function that returns an error
+func doSomething() error {
+	// Return an instance of MyError
+	return &MyError{Msg: "something went wrong"}
 }
 
 func main() {
-	err := FunctionThatMightFail(-1)
-	if err != nil {
-		fmt.Println("Error:", err)
-	}
-
-	err = FunctionThatMightFail(5)
-	if err != nil {
-		fmt.Println("Error:", err)
+	// Call the function that may return an error
+	if err := doSomething(); err != nil {
+		fmt.Println("Error occurred:", err)
+	} else {
+		fmt.Println("No error occurred.")
 	}
 }
