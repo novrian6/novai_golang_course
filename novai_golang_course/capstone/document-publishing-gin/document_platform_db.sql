@@ -1,28 +1,4 @@
---
--- PostgreSQL database dump
---
 
--- Dumped from database version 16.2 (Postgres.app)
--- Dumped by pg_dump version 16.2 (Homebrew)
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
-SET default_tablespace = '';
-
-SET default_table_access_method = heap;
-
---
--- Name: documents; Type: TABLE; Schema: public; Owner: novanovriansyah
---
 
 CREATE TABLE public.documents (
     id integer NOT NULL,
@@ -35,7 +11,7 @@ CREATE TABLE public.documents (
 );
 
 
-ALTER TABLE public.documents OWNER TO novanovriansyah;
+ALTER TABLE public.documents OWNER TO postgres;
 
 --
 -- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: novanovriansyah
@@ -50,7 +26,7 @@ CREATE SEQUENCE public.documents_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.documents_id_seq OWNER TO novanovriansyah;
+ALTER SEQUENCE public.documents_id_seq OWNER TO postgres;
 
 --
 -- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: novanovriansyah
@@ -71,7 +47,7 @@ CREATE TABLE public.purchases (
 );
 
 
-ALTER TABLE public.purchases OWNER TO novanovriansyah;
+ALTER TABLE public.purchases OWNER TO postgres;
 
 --
 -- Name: purchases_id_seq; Type: SEQUENCE; Schema: public; Owner: novanovriansyah
@@ -86,7 +62,7 @@ CREATE SEQUENCE public.purchases_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.purchases_id_seq OWNER TO novanovriansyah;
+ALTER SEQUENCE public.purchases_id_seq OWNER TO postgres;
 
 --
 -- Name: purchases_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: novanovriansyah
@@ -108,7 +84,7 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO novanovriansyah;
+ALTER TABLE public.users OWNER TO postgres;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: novanovriansyah
@@ -123,7 +99,7 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_id_seq OWNER TO novanovriansyah;
+ALTER SEQUENCE public.users_id_seq OWNER TO postgres;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: novanovriansyah
@@ -153,33 +129,9 @@ ALTER TABLE ONLY public.purchases ALTER COLUMN id SET DEFAULT nextval('public.pu
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
---
--- Data for Name: documents; Type: TABLE DATA; Schema: public; Owner: novanovriansyah
---
-
-COPY public.documents (id, title, description, author_id, price, file_path, created_at) FROM stdin;
-\.
 
 
---
--- Data for Name: purchases; Type: TABLE DATA; Schema: public; Owner: novanovriansyah
---
 
-COPY public.purchases (id, user_id, document_id, purchased_at) FROM stdin;
-\.
-
-
---
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: novanovriansyah
---
-
-COPY public.users (id, username, email, password_hash, created_at) FROM stdin;
-\.
-
-
---
--- Name: documents_id_seq; Type: SEQUENCE SET; Schema: public; Owner: novanovriansyah
---
 
 SELECT pg_catalog.setval('public.documents_id_seq', 1, false);
 
@@ -260,9 +212,4 @@ ALTER TABLE ONLY public.purchases
 
 ALTER TABLE ONLY public.purchases
     ADD CONSTRAINT purchases_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- PostgreSQL database dump complete
---
 
