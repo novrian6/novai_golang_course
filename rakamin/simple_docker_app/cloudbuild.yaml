@@ -1,0 +1,18 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/rakamin-ttc-odp-it-bni/demo-repo/go-simpleapp:$SHORT_SHA', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/rakamin-ttc-odp-it-bni/demo-repo/go-simpleapp:$SHORT_SHA']
+images:
+  - 'us-central1-docker.pkg.dev/rakamin-ttc-odp-it-bni/demo-repo/go-simpleapp:$SHORT_SHA'
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  args:
+    - deploy
+    - releases
+    - create
+    - "go-release-$SHORT_SHA"
+    - --delivery-pipeline=go-simpleapp-pipeline
+    - --region=us-central1
+    - --images=go-simpleapp=us-central1-docker.pkg.dev/rakamin-ttc-odp-it-bni/demo-repo/go-simpleapp:$SHORT_SHA
